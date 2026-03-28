@@ -30,12 +30,12 @@ const AvatarUpload = ({ userId, onUploadSuccess, currentUrl }: Props) => {
       const fileName = `${userId}-${Math.random().toString(36).substring(7)}.${fileExt}`;
 
       // ۱. آپلود به Storage (مطمئن شوید نام باکت دقیقاً 'avatars' است)
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('avatars')
-        .upload(fileName, file, { 
-          cacheControl: '3600',
-          upsert: true 
-        });
+     const { error: uploadError } = await supabase.storage
+  .from('avatars')
+  .upload(fileName, file, { 
+    cacheControl: '3600',
+    upsert: true 
+  });
 
       if (uploadError) {
         // اگر خطا از RLS بود، پیام واضح‌تری بدهیم
